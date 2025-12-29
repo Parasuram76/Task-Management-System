@@ -5,6 +5,7 @@ import mongoose from 'mongoose';
 import cookieParser from 'cookie-parser';
 import dotenv from 'dotenv'
 import authRouter from './routes/AuthRoutes.js';
+import taskRouter from './routes/taskRoutes.js';
 
 
 
@@ -22,6 +23,7 @@ const server = http.createServer(app) ;
 
 
 app.use('/auth' , authRouter) ;
+app.use('/task' , taskRouter) ;
 
 
 
@@ -30,6 +32,6 @@ server.listen(PORT , () => {
 })
 
 
-mongoose.connect("mongodb://127.0.0.1:27017/CodingClub")
+mongoose.connect(process.env.MONGO_URI)
 .then(() => console.log("Connected to DB"))
 .catch((err) => console.log("Failed to connect with DB :" + err))
