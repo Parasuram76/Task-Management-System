@@ -14,7 +14,7 @@ dotenv.config()
 const PORT = 5000 ;
 const app = express() ;
 app.use(cors({
-    origin : 'http://localhost:5173',
+    origin : 'https://task-management-system-1-d407.onrender.com',
     credentials : true
 }))
 app.use(express.json())
