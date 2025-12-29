@@ -23,7 +23,7 @@ const server = http.createServer(app) ;
 
 
 app.use('/auth' , authRouter) ;
-app.use('/task' , taskRouter) ;
+app.use('/tasks' , taskRouter) ;
 
 
 

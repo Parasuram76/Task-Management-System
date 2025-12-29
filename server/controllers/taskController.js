@@ -47,10 +47,21 @@ export const getTasks = async (req, res) => {
 export const updateTask = async (req, res) => {
     try {
         const { id } = req.params;
+        const { status } = req.body;
+
+        // Validate status if provided
+        const validStatuses = ["pending", "in-progress", "completed"];
+
+        if (status && !validStatuses.includes(status)) {
+            return res.status(400).json({
+                success: false,
+                message: "Invalid status. Allowed: pending, in-progress, completed"
+            });
+        }
 
         const task = await Task.findOneAndUpdate(
             { _id: id, createdBy: req.userId },
-            req.body,
+            req.body,   // includes status or any other fields
             { new: true }
         );
 
@@ -63,6 +74,7 @@ export const updateTask = async (req, res) => {
             message: "Task updated successfully",
             task,
         });
+
     } catch (error) {
         console.log("Update Task Error:", error);
         return res.status(500).json({ message: "Internal server error" });
